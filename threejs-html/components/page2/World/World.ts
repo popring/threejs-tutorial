@@ -4,7 +4,7 @@ import { createRenderer } from '../systems/renderer';
 import { createCube } from '../components/cube';
 import { Scene, WebGLRenderer, PerspectiveCamera, Mesh } from 'three';
 import { Resizer } from '../systems/Resizer';
-
+import { createLight } from '../components/light';
 class World {
   private container: HTMLElement;
   private scene: Scene;
@@ -21,7 +21,8 @@ class World {
     container.append(this.renderer.domElement);
 
     const cube = createCube();
-    this.scene.add(cube);
+    const light = createLight();
+    this.scene.add(cube, light);
 
     const resizer = new Resizer(this.camera, this.renderer, this.container);
   }
