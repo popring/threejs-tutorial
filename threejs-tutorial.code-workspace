@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "name": "threejs-html",
+      "path": "./threejs-html"
+    },
+    {
+      "name": "threejs-demo",
+      "path": "./threejs-demo"
+    },
+    {
+      "name": "threejs-tutorial",
+      "path": "./"
+    }
+  ],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "threejs-html"
+  }
+}
