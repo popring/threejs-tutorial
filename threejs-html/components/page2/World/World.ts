@@ -10,7 +10,6 @@ class World {
   private scene: Scene;
   private camera: PerspectiveCamera;
   private renderer: WebGLRenderer;
-  private cube: Mesh;
 
   // 1. Create an instance of the World app
   constructor(container) {
