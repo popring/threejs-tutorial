@@ -12,6 +12,7 @@ import {
 import { Resizer } from '../systems/Resizer';
 import { createLight } from '../components/light';
 import { Loop } from '../systems/Loop';
+import { createControls } from '../systems/controls';
 class World {
   private container: HTMLElement;
   private scene: Scene;
@@ -27,10 +28,16 @@ class World {
     this.loop = new Loop(this.camera, this.scene, this.renderer);
     container.append(this.renderer.domElement);
 
+    const controls = createControls(this.camera, this.renderer.domElement);
+    controls.addEventListener('change', () => {
+      this.render();
+    });
+
     const cube = createCube();
     const light = createLight();
 
-    this.loop.updateables.push(cube);
+    // this.loop.updateables.push(cube);
+    this.loop.updateables.push(controls);
 
     this.scene.add(cube, light);
 
