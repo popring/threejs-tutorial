@@ -10,7 +10,7 @@ import {
   MathUtils,
 } from 'three';
 import { Resizer } from '../systems/Resizer';
-import { createLight } from '../components/light';
+import { createLights } from '../components/light';
 import { Loop } from '../systems/Loop';
 import { createControls } from '../systems/controls';
 class World {
@@ -34,12 +34,11 @@ class World {
     });
 
     const cube = createCube();
-    const light = createLight();
+    const { mainLight, ambientLight } = createLights();
 
-    // this.loop.updateables.push(cube);
     this.loop.updateables.push(controls);
 
-    this.scene.add(cube, light);
+    this.scene.add(ambientLight, mainLight, cube);
 
     const resizer = new Resizer(this.camera, this.renderer, this.container);
     resizer.onResize = () => {
