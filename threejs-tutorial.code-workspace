@@ -2,11 +2,11 @@
   "folders": [
     {
       "name": "threejs-html",
-      "path": "./threejs-html"
+      "path": "./packages/threejs-html"
     },
     {
       "name": "threejs-demo",
-      "path": "./threejs-demo"
+      "path": "./packages/threejs-demo"
     },
     {
       "name": "threejs-tutorial",
