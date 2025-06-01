@@ -5,10 +5,6 @@
       "path": "./packages/threejs-html"
     },
     {
-      "name": "threejs-demo",
-      "path": "./packages/threejs-demo"
-    },
-    {
       "name": "threejs-tutorial",
       "path": "./"
     }
