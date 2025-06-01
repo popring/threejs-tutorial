@@ -50,6 +50,8 @@ class World {
     const { parrot, flamingo, stork } = await loadBirds();
 
     this.controls.target.copy(parrot.position);
+    this.loop.updateables.push(parrot, flamingo, stork);
+
     this.scene.add(parrot, flamingo, stork);
   }
 
