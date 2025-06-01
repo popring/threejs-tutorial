@@ -1,9 +1,11 @@
 import {
   SphereGeometry,
   Mesh,
-  MeshBasicMaterial,
   Group,
   MeshStandardMaterial,
+  ConeGeometry,
+  DodecahedronGeometry,
+  RingGeometry,
   MathUtils,
 } from 'three';
 
@@ -11,6 +13,9 @@ function createMeshGroup() {
   const group = new Group();
 
   const geometry = new SphereGeometry(0.25, 16, 16);
+  // const geometry = new ConeGeometry(0.25, 1, 16, 1, false, 0, Math.PI * 2);
+  // const geometry = new DodecahedronGeometry(0.3, 0);
+  // const geometry = new RingGeometry(0.1, 0.2, 32);
 
   const material = new MeshStandardMaterial({
     color: 'indigo',
@@ -20,7 +25,7 @@ function createMeshGroup() {
 
   group.add(protoSphere);
 
-  for (let i = 0; i < 1; i += 0.05) {
+  for (let i = 0; i < 1; i += 0.1) {
     const sphere = protoSphere.clone();
 
     sphere.position.x = Math.cos(2 * Math.PI * i);
@@ -37,7 +42,7 @@ function createMeshGroup() {
 
   // @ts-ignore
   group.tick = (delta: number) => {
-    group.rotation.z -= delta * radiansPerSecond;
+    group.rotation.z += delta * radiansPerSecond;
   };
 
   return group;
