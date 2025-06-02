@@ -24,6 +24,11 @@ const camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
 camera.position.set(200, 200, 200);
 camera.lookAt(0, 0, 0);
 
+const size = 100;
+const divisions = 10;
+const gridHelper = new THREE.GridHelper(size, divisions);
+scene.add(gridHelper);
+
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(width, height)
 
