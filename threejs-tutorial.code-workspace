@@ -5,6 +5,10 @@
       "path": "./packages/threejs-html"
     },
     {
+      "name": "guang-first-scene",
+      "path": "./packages/guang-first-scene"
+    },
+    {
       "name": "threejs-tutorial",
       "path": "./"
     }

@@ -6,7 +6,17 @@ settings:
 
 importers:
 
-  .: {}
+  .:
+    dependencies:
+      three:
+        specifier: ^0.174.0
+        version: 0.174.0
+    devDependencies:
+      '@types/three':
+        specifier: ^0.174.0
+        version: 0.174.0
+
+  packages/guang-first-scene: {}
 
   packages/threejs-html:
     dependencies:
