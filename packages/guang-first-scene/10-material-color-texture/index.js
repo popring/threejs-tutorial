@@ -3,8 +3,8 @@ import {
     OrbitControls
 } from 'three/addons/controls/OrbitControls.js';
 // import mesh from './mesh.js';
-import mesh from './mesh3.js';
-// import mesh from './mesh4.js';
+// import mesh from './mesh3.js';
+import mesh from './mesh4.js';
 
 const scene = new THREE.Scene();
 

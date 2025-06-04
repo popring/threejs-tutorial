@@ -16,7 +16,7 @@ const geometry = new THREE.PlaneGeometry(1000, 1000);
 
 const material = new THREE.MeshBasicMaterial({
   map: texture,
-  alphaMap: texture,
+  aoMap: texture,
 });
 
 const mesh = new THREE.Mesh(geometry, material);

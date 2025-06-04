@@ -9,6 +9,7 @@ const geometry = new THREE.SphereGeometry(100);
 const material = new THREE.MeshBasicMaterial({
   // color: 'skyblue',
   map: texture,
+  // aoMap: texture,
 });
 
 const mesh = new THREE.Mesh(geometry, material);
