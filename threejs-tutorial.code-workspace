@@ -9,6 +9,10 @@
       "path": "./packages/guang-first-scene"
     },
     {
+      "name": "threejs-editor",
+      "path": "./packages/threejs-editor"
+    },
+    {
       "name": "threejs-tutorial",
       "path": "./"
     }
