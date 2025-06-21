@@ -29,6 +29,7 @@ export type InitialState = {
   data: {
     meshArr: MeshData[];
   };
+  selectedObj: any;
 };
 
 const initialState: InitialState = {
@@ -54,6 +55,7 @@ const initialState: InitialState = {
       },
     ],
   },
+  selectedObj: null,
 };
 
 function createBox(): MeshData {
@@ -100,9 +102,13 @@ function createCylinder(): MeshData {
   };
 }
 
-export const useThreeStore = create<
-  typeof initialState & { addMesh: (type: MeshTypes) => void }
->((set) => {
+type ThreeStore = typeof initialState & {
+  addMesh: (type: MeshTypes) => void;
+  setSelectedObj: (obj: any) => void;
+  removeObj: (obj: any) => void;
+};
+
+export const useThreeStore = create<ThreeStore>((set) => {
   return {
     ...initialState,
     addMesh(type: MeshTypes) {
@@ -121,6 +127,23 @@ export const useThreeStore = create<
       } else if (type === 'Cylinder') {
         addItem(createCylinder);
       }
+    },
+    setSelectedObj(obj: any) {
+      set({
+        selectedObj: obj,
+      });
+    },
+    removeObj(name: string) {
+      set((state) => {
+        console.log('state.data.meshArr', state.data.meshArr);
+        return {
+          data: {
+            ...state.data,
+            meshArr: state.data.meshArr.filter((item) => item.name !== name),
+          },
+          selectedObj: null,
+        };
+      });
     },
   };
 });

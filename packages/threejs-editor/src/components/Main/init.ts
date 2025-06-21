@@ -8,7 +8,7 @@ import {
   GammaCorrectionShader,
 } from 'three/examples/jsm/Addons.js';
 
-export function init(dom: HTMLElement) {
+export function init(dom: HTMLElement, data: any, onSelected: (obj: any) => void) {
   const scene = new THREE.Scene();
 
   const axesHelper = new THREE.AxesHelper(500);
@@ -84,8 +84,10 @@ export function init(dom: HTMLElement) {
       //   }
       // }
       outlinePass.selectedObjects = [obj];
+      onSelected(obj);
     } else {
       outlinePass.selectedObjects = [];
+      onSelected(null);
     }
   });
 

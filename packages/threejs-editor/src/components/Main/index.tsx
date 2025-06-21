@@ -4,12 +4,16 @@ import { useThreeStore } from '../../store';
 import * as THREE from 'three';
 
 function Main() {
-  const { data } = useThreeStore();
+  const { data, setSelectedObj, selectedObj, removeObj } = useThreeStore();
   const sceneRef = useRef<THREE.Scene | null>(null);
+
+  const onSelected = (obj: any) => {
+    setSelectedObj(obj);
+  };
 
   useEffect(() => {
     const dom = document.getElementById('canvas-container')!;
-    const { scene } = init(dom);
+    const { scene } = init(dom, data, onSelected);
     sceneRef.current = scene;
 
     return () => {
@@ -22,7 +26,7 @@ function Main() {
     if (!scene) return;
 
     data.meshArr.forEach((item) => {
-      if (item.type === "Box") {
+      if (item.type === 'Box') {
         const {
           width,
           height,
@@ -43,7 +47,7 @@ function Main() {
         mesh.name = item.name;
         mesh.position.copy(position);
         scene.add(mesh);
-      } else if (item.type === "Cylinder") {
+      } else if (item.type === 'Cylinder') {
         const {
           radiusTop,
           radiusBottom,
@@ -70,6 +74,17 @@ function Main() {
       }
     });
   }, [data]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Backspace') {
+        sceneRef.current?.remove(selectedObj);
+        removeObj(selectedObj.name);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [removeObj, selectedObj]);
 
   return <div id='canvas-container' className='Main'></div>;
 }
