@@ -4,7 +4,8 @@ import { useThreeStore } from '../../store';
 import * as THREE from 'three';
 
 function Main() {
-  const { data, setSelectedObj, selectedObj, removeObj } = useThreeStore();
+  const { data, setSelectedObj, selectedObj, removeObj, updateMeshPositon } =
+    useThreeStore();
   const sceneRef = useRef<THREE.Scene | null>(null);
 
   const onSelected = (obj: any) => {
@@ -13,7 +14,7 @@ function Main() {
 
   useEffect(() => {
     const dom = document.getElementById('canvas-container')!;
-    const { scene } = init(dom, data, onSelected);
+    const { scene } = init(dom, data, onSelected, updateMeshPositon);
     sceneRef.current = scene;
 
     return () => {

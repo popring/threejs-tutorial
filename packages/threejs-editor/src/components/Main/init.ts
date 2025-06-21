@@ -1,14 +1,21 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+// import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import {
   EffectComposer,
   OutlinePass,
   RenderPass,
   ShaderPass,
   GammaCorrectionShader,
+  TransformControls,
+  OrbitControls,
 } from 'three/examples/jsm/Addons.js';
 
-export function init(dom: HTMLElement, data: any, onSelected: (obj: any) => void) {
+export function init(
+  dom: HTMLElement,
+  data: any,
+  onSelected: (obj: any) => void,
+  updateMeshPositon: (name: string, position: { x: number; y: number; z: number }) => void
+) {
   const scene = new THREE.Scene();
 
   const axesHelper = new THREE.AxesHelper(500);
@@ -48,13 +55,35 @@ export function init(dom: HTMLElement, data: any, onSelected: (obj: any) => void
   const gammaPass = new ShaderPass(GammaCorrectionShader);
   composer.addPass(gammaPass);
 
-  function render() {
+  const transformControls = new TransformControls(camera, renderer.domElement);
+  const transformHelper = transformControls.getHelper();
+  scene.add(transformHelper);
+
+  const orbitControls = new OrbitControls(camera, renderer.domElement);
+  transformControls.addEventListener('change', (e) => {
+    console.log('e', e);
+    const obj = transformControls.object;
+    console.log('obj', obj);
+    if (obj) {
+      updateMeshPositon(obj.name, {
+        x: obj.position.x,
+        y: obj.position.y,
+        z: obj.position.z,
+      });
+    }
+  });
+  transformControls.addEventListener('dragging-changed', (e) => {
+    orbitControls.enabled = !e.value;
+  });
+
+  function render(time: number) {
     composer.render();
+    transformControls.update(time);
     // renderer.render(scene, camera);
     requestAnimationFrame(render);
   }
 
-  render();
+  render(0);
 
   dom.append(renderer.domElement);
 
@@ -73,7 +102,11 @@ export function init(dom: HTMLElement, data: any, onSelected: (obj: any) => void
     const raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(new THREE.Vector2(x, y), camera);
 
-    const intersections = raycaster.intersectObjects(scene.children);
+    const objs = scene.children.filter(
+      (item) => item.name.startsWith('Box') || item.name.startsWith('Cylinder')
+    );
+
+    const intersections = raycaster.intersectObjects(objs);
 
     if (intersections.length > 0) {
       const obj = intersections[0].object;
@@ -85,13 +118,13 @@ export function init(dom: HTMLElement, data: any, onSelected: (obj: any) => void
       // }
       outlinePass.selectedObjects = [obj];
       onSelected(obj);
+      transformControls.attach(obj);
     } else {
       outlinePass.selectedObjects = [];
       onSelected(null);
+      transformControls.detach();
     }
   });
-
-  new OrbitControls(camera, renderer.domElement);
 
   return {
     scene,
