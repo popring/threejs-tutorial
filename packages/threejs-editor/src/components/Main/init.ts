@@ -8,13 +8,18 @@ import {
   GammaCorrectionShader,
   TransformControls,
   OrbitControls,
+  type TransformControlsMode,
 } from 'three/examples/jsm/Addons.js';
 
 export function init(
   dom: HTMLElement,
   data: any,
   onSelected: (obj: any) => void,
-  updateMeshPositon: (name: string, position: { x: number; y: number; z: number }) => void
+  updateMeshInfo: (
+    name: string,
+    info: { x: number; y: number; z: number },
+    type: 'position' | 'scale' | 'rotation',
+  ) => void
 ) {
   const scene = new THREE.Scene();
 
@@ -60,16 +65,16 @@ export function init(
   scene.add(transformHelper);
 
   const orbitControls = new OrbitControls(camera, renderer.domElement);
-  transformControls.addEventListener('change', (e) => {
-    console.log('e', e);
+  transformControls.addEventListener('change', () => {
     const obj = transformControls.object;
-    console.log('obj', obj);
     if (obj) {
-      updateMeshPositon(obj.name, {
-        x: obj.position.x,
-        y: obj.position.y,
-        z: obj.position.z,
-      });
+      if (transformControls.mode === 'translate') {
+        updateMeshInfo(obj.name, obj.position, 'position');
+      } else if (transformControls.mode === 'scale') {
+        updateMeshInfo(obj.name, obj.scale, 'scale');
+      } else if (transformControls.mode === 'rotate') {
+        updateMeshInfo(obj.name, obj.rotation, 'rotation');
+      }
     }
   });
   transformControls.addEventListener('dragging-changed', (e) => {
@@ -126,7 +131,12 @@ export function init(
     }
   });
 
+  function setTransformControlsMode(mode: TransformControlsMode) {
+    transformControls.setMode(mode);
+  }
+
   return {
     scene,
+    setTransformControlsMode,
   };
 }

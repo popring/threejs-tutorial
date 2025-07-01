@@ -1,8 +1,12 @@
+// import type { BoxGeometry, CylinderGeometry } from 'three';
 import { create } from 'zustand';
 
 let id = 1;
 
 export type MeshTypes = 'Box' | 'Cylinder';
+
+// type MeshCylinderProps = CylinderGeometry['parameters'];
+// type MeshBoxProps = BoxGeometry['parameters'];
 export interface MeshData {
   id: number;
   type: MeshTypes;
@@ -21,6 +25,16 @@ export interface MeshData {
     };
     radiusTop?: number;
     radiusBottom?: number;
+    scale?: {
+      x: number;
+      y: number;
+      z: number;
+    };
+    rotation?: {
+      x: number;
+      y: number;
+      z: number;
+    };
   };
 }
 
@@ -106,7 +120,11 @@ type ThreeStore = typeof initialState & {
   addMesh: (type: MeshTypes) => void;
   setSelectedObj: (obj: any) => void;
   removeObj: (obj: any) => void;
-  updateMeshPositon: (name: string, position: { x: number; y: number; z: number }) => void;
+  updateMeshInfo: (
+    name: string,
+    info: { x: number; y: number; z: number },
+    type: 'position' | 'scale' | 'rotation',
+  ) => void;
 };
 
 export const useThreeStore = create<ThreeStore>((set) => {
@@ -146,20 +164,34 @@ export const useThreeStore = create<ThreeStore>((set) => {
         };
       });
     },
-    updateMeshPositon(name: string, position: { x: number; y: number; z: number }) {
-      set(state => {
+    updateMeshInfo(
+      name: string,
+      info: { x: number; y: number; z: number },
+      type: 'position' | 'scale' | 'rotation',
+    ) {
+      set((state) => {
         return {
           data: {
             ...state.data,
             meshArr: state.data.meshArr.map((item) => {
               if (item.name === name) {
-                return { ...item, props: { ...item.props, position } };
+                if (type === 'position') {
+                  item.props.position = info;
+                } else if (type === 'scale') {
+                  item.props.scale = info;
+                } else if (type === 'rotation') {
+                  item.props.rotation = {
+                    x: info.x,
+                    y: info.y,
+                    z: info.z,
+                  };
+                }
               }
               return item;
             }),
-          }
-        }
-      })
+          },
+        };
+      });
     },
   };
 });
