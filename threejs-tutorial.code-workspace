@@ -1,21 +1,13 @@
 {
   "folders": [
     {
-      "name": "threejs-html",
-      "path": "./packages/threejs-html"
-    },
-    {
-      "name": "guang-first-scene",
-      "path": "./packages/guang-first-scene"
-    },
-    {
-      "name": "threejs-editor",
-      "path": "./packages/threejs-editor"
+      "name": "04-transform-objects",
+      "path": "./journey/04-transform-objects"
     },
     {
       "name": "threejs-tutorial",
       "path": "./"
-    }
+    },
   ],
   "settings": {
     "liveServer.settings.multiRootWorkspaceName": "threejs-html"

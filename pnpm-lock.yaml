@@ -16,6 +16,19 @@ importers:
         specifier: ^0.174.0
         version: 0.174.0
 
+  journey/04-transform-objects:
+    dependencies:
+      three:
+        specifier: ^0.174.0
+        version: 0.174.0
+    devDependencies:
+      vite:
+        specifier: ^6.2.2
+        version: 6.3.5(sass@1.89.2)(yaml@2.8.0)
+      vite-plugin-restart:
+        specifier: ^0.4.2
+        version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
+
   packages/guang-first-scene: {}
 
   packages/threejs-editor:
@@ -1591,6 +1604,11 @@ packages:
     resolution: {integrity: sha512-Rb46I4cGGVBmjamjphe8L/UnvJD+uPPtTkNvX5mZgqdbavhI4EbgIWJiIHXJ8bc/i9EQGPRh4DwEURJ552Do0A==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  vite-plugin-restart@0.4.2:
+    resolution: {integrity: sha512-9aWN2ScJ8hbT7aC8SDeZnsbWapnslz1vhNq6Vgf2GU9WdN4NExlrWhtnu7pmtOUG3Guj8y6lPcUZ+ls7SVP33w==}
+    peerDependencies:
+      vite: ^2.9.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
 
   vite@6.3.5:
     resolution: {integrity: sha512-cZn6NDFE7wdTpINgs++ZJ4N49W2vRp8LCKrn3Ob1kYNtOo21vfDoaV5GzBfLU4MovSAB8uNRm4jgzVQZ+mBzPQ==}
@@ -3195,6 +3213,11 @@ snapshots:
   use-sync-external-store@1.5.0(react@19.1.0):
     dependencies:
       react: 19.1.0
+
+  vite-plugin-restart@0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0)):
+    dependencies:
+      micromatch: 4.0.8
+      vite: 6.3.5(sass@1.89.2)(yaml@2.8.0)
 
   vite@6.3.5(sass@1.89.2)(yaml@2.8.0):
     dependencies:
