@@ -29,6 +29,48 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
 
+  journey/05-animations:
+    dependencies:
+      gsap:
+        specifier: 3.5.1
+        version: 3.5.1
+      three:
+        specifier: ^0.174.0
+        version: 0.174.0
+    devDependencies:
+      vite:
+        specifier: ^6.2.2
+        version: 6.3.5(sass@1.89.2)(yaml@2.8.0)
+      vite-plugin-restart:
+        specifier: ^0.4.2
+        version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
+
+  journey/06-cameras:
+    dependencies:
+      three:
+        specifier: ^0.174.0
+        version: 0.174.0
+    devDependencies:
+      vite:
+        specifier: ^6.2.2
+        version: 6.3.5(sass@1.89.2)(yaml@2.8.0)
+      vite-plugin-restart:
+        specifier: ^0.4.2
+        version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
+
+  journey/07-fullscreen-and-resizing-final:
+    dependencies:
+      three:
+        specifier: ^0.174.0
+        version: 0.174.0
+    devDependencies:
+      vite:
+        specifier: ^6.2.2
+        version: 6.3.5(sass@1.89.2)(yaml@2.8.0)
+      vite-plugin-restart:
+        specifier: ^0.4.2
+        version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
+
   packages/guang-first-scene: {}
 
   packages/threejs-editor:
@@ -1070,6 +1112,9 @@ packages:
 
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
+
+  gsap@3.5.1:
+    resolution: {integrity: sha512-EMV0RSUKZNeTUzLKAizGlwxVOUyif3/g8I3S1aA/hf3gbqwBvmQ02x1RdTBQNQMOpHCVBv9y/vaHwfctoAg8zw==}
 
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
@@ -2621,6 +2666,8 @@ snapshots:
   globals@16.2.0: {}
 
   graphemer@1.4.0: {}
+
+  gsap@3.5.1: {}
 
   has-flag@4.0.0: {}
 
