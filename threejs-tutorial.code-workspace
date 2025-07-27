@@ -1,8 +1,8 @@
 {
   "folders": [
     {
-      "name": "04-transform-objects",
-      "path": "./journey/04-transform-objects"
+      "name": "journey",
+      "path": "./journey"
     },
     {
       "name": "threejs-tutorial",
