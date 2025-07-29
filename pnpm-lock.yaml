@@ -145,6 +145,22 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
 
+  journey/15-shadows:
+    dependencies:
+      lil-gui:
+        specifier: ^0.20.0
+        version: 0.20.0
+      three:
+        specifier: ^0.174.0
+        version: 0.174.0
+    devDependencies:
+      vite:
+        specifier: ^6.2.2
+        version: 6.3.5(sass@1.89.2)(yaml@2.8.0)
+      vite-plugin-restart:
+        specifier: ^0.4.2
+        version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
+
   packages/guang-first-scene: {}
 
   packages/threejs-editor:
