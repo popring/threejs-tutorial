@@ -88,20 +88,42 @@ const bushMaterial = new THREE.MeshStandardMaterial({ color: 'green' });
 
 const bush1 = new THREE.Mesh(bushGeometry, bushMaterial);
 bush1.position.set(0.8, 0.2, 2.2);
-bush1.scale.setScalar(0.4)
+bush1.scale.setScalar(0.4);
 
-const bush2 = new THREE.Mesh(bushGeometry, bushMaterial)
-bush2.scale.set(0.25, 0.25, 0.25)
-bush2.position.set(1.4, 0.1, 2.1)
+const bush2 = new THREE.Mesh(bushGeometry, bushMaterial);
+bush2.scale.set(0.25, 0.25, 0.25);
+bush2.position.set(1.4, 0.1, 2.1);
 
-const bush3 = new THREE.Mesh(bushGeometry, bushMaterial)
-bush3.scale.set(0.4, 0.4, 0.4)
-bush3.position.set(- 0.8, 0.1, 2.2)
+const bush3 = new THREE.Mesh(bushGeometry, bushMaterial);
+bush3.scale.set(0.4, 0.4, 0.4);
+bush3.position.set(-0.8, 0.1, 2.2);
 
-const bush4 = new THREE.Mesh(bushGeometry, bushMaterial)
-bush4.scale.set(0.15, 0.15, 0.15)
-bush4.position.set(- 1, 0.05, 2.6)
+const bush4 = new THREE.Mesh(bushGeometry, bushMaterial);
+bush4.scale.set(0.15, 0.15, 0.15);
+bush4.position.set(-1, 0.05, 2.6);
 house.add(bush1, bush2, bush3, bush4);
+
+const graveGeometry = new THREE.BoxGeometry(0.6, 0.8, 0.2);
+const graveMaterial = new THREE.MeshMatcapMaterial();
+const graves = new THREE.Group();
+scene.add(graves);
+
+for (let i = 0; i < 30; i++) {
+  const grave = new THREE.Mesh(graveGeometry, graveMaterial);
+  const radius = 3 + Math.random() * 4;
+  const angle = Math.random() * Math.PI * 2;
+  const x = Math.sin(angle) * radius;
+  const z = Math.cos(angle) * radius;
+  grave.position.x = x;
+  grave.position.z = z;
+  grave.position.y = Math.random() * 0.4;
+
+  grave.rotation.x = (Math.random() - 0.5) * 0.4
+  grave.rotation.y = (Math.random() - 0.5) * 0.4
+  grave.rotation.z = (Math.random() - 0.5) * 0.4
+
+  graves.add(grave);
+}
 
 /**
  * Lights
