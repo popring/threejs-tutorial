@@ -1,0 +1,36 @@
+name: Update HTML List in README
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'journey/**/*.html'
+      - 'packages/**/*.html'
+      - 'README.md'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Update HTML list in README
+      run: |
+        node .github/scripts/update_html_list.js
+    
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add README.md
+        git diff --quiet && git diff --staged --quiet || git commit -m "Update HTML list in README"
+        git push 
