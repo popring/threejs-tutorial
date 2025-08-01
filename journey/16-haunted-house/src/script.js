@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Timer } from 'three/addons/misc/Timer.js';
 import GUI from 'lil-gui';
+import { Sky } from 'three/examples/jsm/Addons.js';
 
 const values = {
   wallWidth: 4,
@@ -92,6 +93,7 @@ const floor = new THREE.Mesh(
   })
 );
 floor.rotation.x = -Math.PI * 0.5;
+floor.receiveShadow = true;
 scene.add(floor);
 
 gui
@@ -132,6 +134,8 @@ const wall = new THREE.Mesh(
     normalMap: wallNormalTexture,
   })
 );
+wall.castShadow = true;
+wall.receiveShadow = true;
 wall.position.y += values.wallHeight / 2 + 0.01;
 house.add(wall);
 
@@ -161,6 +165,8 @@ const roof = new THREE.Mesh(
 );
 roof.position.y = values.wallHeight + values.roofHeight / 2;
 roof.rotation.y = Math.PI / 4;
+roof.castShadow = true;
+roof.receiveShadow = true;
 house.add(roof);
 
 // Door
@@ -291,6 +297,8 @@ for (let i = 0; i < 30; i++) {
   grave.position.x = x;
   grave.position.z = z;
   grave.position.y = Math.random() * 0.4;
+  grave.castShadow = true;
+  grave.receiveShadow = true;
 
   grave.rotation.x = (Math.random() - 0.5) * 0.4;
   grave.rotation.y = (Math.random() - 0.5) * 0.4;
@@ -304,13 +312,37 @@ for (let i = 0; i < 30; i++) {
  * Lights
  */
 // Ambient light
-const ambientLight = new THREE.AmbientLight('#ffffff', 0.5);
+const ambientLight = new THREE.AmbientLight('#86cdff', 0.257);
 scene.add(ambientLight);
 
 // Directional light
-const directionalLight = new THREE.DirectionalLight('#ffffff', 1.5);
+const directionalLight = new THREE.DirectionalLight('#86cdff', 1.5);
 directionalLight.position.set(3, 2, -8);
+directionalLight.castShadow = true;
+directionalLight.shadow.mapSize.set(256, 256);
+directionalLight.shadow.camera.top = 8;
+directionalLight.shadow.camera.right = 8;
+directionalLight.shadow.camera.bottom = -8;
+directionalLight.shadow.camera.left = -8;
+directionalLight.shadow.camera.near = 1;
+directionalLight.shadow.camera.far = 20;
+
 scene.add(directionalLight);
+
+const doorLight = new THREE.PointLight('#ff7d46', 5);
+doorLight.position.set(0, 2.2, 2.5);
+scene.add(doorLight);
+
+/**
+ * Ghosts
+ */
+const ghost1 = new THREE.PointLight('#8800ff', 6);
+const ghost2 = new THREE.PointLight('#ff0088', 6);
+const ghost3 = new THREE.PointLight('#ff0000', 6);
+ghost1.castShadow = true;
+ghost2.castShadow = true;
+ghost3.castShadow = true;
+scene.add(ghost1, ghost2, ghost3);
 
 /**
  * Sizes
@@ -361,6 +393,8 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 /**
  * Animate
@@ -371,6 +405,51 @@ const tick = () => {
   // Timer
   timer.update();
   const elapsedTime = timer.getElapsed();
+
+  const ghost1Angle = elapsedTime * 0.5;
+  ghost1.position.x = Math.cos(ghost1Angle) * 4;
+  ghost1.position.z = Math.sin(ghost1Angle) * 4;
+  ghost1.position.y =
+    Math.sin(ghost1Angle) *
+    Math.sin(ghost1Angle * 2.34) *
+    Math.sin(ghost1Angle * 3.45);
+
+  const ghost2Angle = -elapsedTime * 0.38;
+  ghost2.position.x = Math.cos(ghost2Angle) * 5;
+  ghost2.position.z = Math.sin(ghost2Angle) * 5;
+  ghost2.position.y =
+    Math.sin(ghost2Angle) *
+    Math.sin(ghost2Angle * 2.34) *
+    Math.sin(ghost2Angle * 3.45);
+
+  const ghost3Angle = elapsedTime * 0.23;
+  ghost3.position.x = Math.cos(ghost3Angle) * 6;
+  ghost3.position.z = Math.sin(ghost3Angle) * 6;
+  ghost3.position.y =
+    Math.sin(ghost3Angle) *
+    Math.sin(ghost3Angle * 2.34) *
+    Math.sin(ghost3Angle * 3.45);
+
+  ghost1.shadow.mapSize.width = 256;
+  ghost1.shadow.mapSize.height = 256;
+  ghost1.shadow.camera.far = 10;
+
+  ghost2.shadow.mapSize.width = 256;
+  ghost2.shadow.mapSize.height = 256;
+  ghost2.shadow.camera.far = 10;
+
+  ghost3.shadow.mapSize.width = 256;
+  ghost3.shadow.mapSize.height = 256;
+  ghost3.shadow.camera.far = 10;
+
+  const sky = new Sky();
+  sky.scale.setScalar(100);
+  sky.material.uniforms['turbidity'].value = 10;
+  sky.material.uniforms['rayleigh'].value = 3;
+  sky.material.uniforms['mieCoefficient'].value = 0.1;
+  sky.material.uniforms['mieDirectionalG'].value = 0.95;
+  sky.material.uniforms['sunPosition'].value.set(0.3, -0.038, -0.95);
+  scene.add(sky);
 
   // Update controls
   controls.update();
