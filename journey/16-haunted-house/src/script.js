@@ -344,6 +344,9 @@ ghost2.castShadow = true;
 ghost3.castShadow = true;
 scene.add(ghost1, ghost2, ghost3);
 
+// scene.fog = new THREE.Fog('#04343f', 1, 13);
+scene.fog = new THREE.FogExp2('#04343f', 0.1);
+
 /**
  * Sizes
  */
@@ -405,6 +408,20 @@ const tick = () => {
   // Timer
   timer.update();
   const elapsedTime = timer.getElapsed();
+
+  if (typeof tick.lastBlinkTime === 'undefined') tick.lastBlinkTime = 0;
+  if (typeof tick.nextBlinkInterval === 'undefined')
+    tick.nextBlinkInterval = Math.random() * 1.5 + 0.8; // 0.8~2.3秒
+
+  if (elapsedTime - tick.lastBlinkTime > tick.nextBlinkInterval) {
+    doorLight.intensity = doorLight.intensity === 1 ? 0 : 1;
+    tick.lastBlinkTime = elapsedTime;
+    tick.nextBlinkInterval = Math.random() * 0.5 + 0.8; // 下次闪烁间隔更长且不规律
+  }
+
+  ghost1.visible = false;
+  ghost2.visible = false;
+  ghost3.visible = false;
 
   const ghost1Angle = elapsedTime * 0.5;
   ghost1.position.x = Math.cos(ghost1Angle) * 4;
