@@ -209,6 +209,44 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
 
+  journey/19-scroll-based-animation:
+    dependencies:
+      gsap:
+        specifier: ^3.13.0
+        version: 3.13.0
+      lil-gui:
+        specifier: ^0.20.0
+        version: 0.20.0
+      three:
+        specifier: ^0.174.0
+        version: 0.174.0
+    devDependencies:
+      vite:
+        specifier: ^6.2.2
+        version: 6.3.5(sass@1.89.2)(yaml@2.8.0)
+      vite-plugin-restart:
+        specifier: ^0.4.2
+        version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
+
+  journey/19-scroll-based-animation-final:
+    dependencies:
+      gsap:
+        specifier: ^3.12.7
+        version: 3.13.0
+      lil-gui:
+        specifier: ^0.20.0
+        version: 0.20.0
+      three:
+        specifier: ^0.174.0
+        version: 0.174.0
+    devDependencies:
+      vite:
+        specifier: ^6.2.2
+        version: 6.3.5(sass@1.89.2)(yaml@2.8.0)
+      vite-plugin-restart:
+        specifier: ^0.4.2
+        version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
+
   packages/guang-first-scene: {}
 
   packages/threejs-editor:
@@ -1250,6 +1288,9 @@ packages:
 
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
+
+  gsap@3.13.0:
+    resolution: {integrity: sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==}
 
   gsap@3.5.1:
     resolution: {integrity: sha512-EMV0RSUKZNeTUzLKAizGlwxVOUyif3/g8I3S1aA/hf3gbqwBvmQ02x1RdTBQNQMOpHCVBv9y/vaHwfctoAg8zw==}
@@ -2807,6 +2848,8 @@ snapshots:
   globals@16.2.0: {}
 
   graphemer@1.4.0: {}
+
+  gsap@3.13.0: {}
 
   gsap@3.5.1: {}
 
