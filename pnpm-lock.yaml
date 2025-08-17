@@ -324,6 +324,37 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
 
+  journey/60-3d-text-with-r3f:
+    dependencies:
+      '@react-three/drei':
+        specifier: ^10.0.4
+        version: 10.6.1(@react-three/fiber@9.1.2(@types/react@19.1.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0))(@types/react@19.1.8)(@types/three@0.174.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0)
+      '@react-three/fiber':
+        specifier: ^9.1.0
+        version: 9.1.2(@types/react@19.1.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0)
+      r3f-perf:
+        specifier: ^7.2.3
+        version: 7.2.3(@react-three/fiber@9.1.2(@types/react@19.1.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0))(@types/react@19.1.8)(@types/three@0.174.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(three@0.174.0)(use-sync-external-store@1.5.0(react@19.0.0))
+      react:
+        specifier: '19.0'
+        version: 19.0.0
+      react-dom:
+        specifier: '19.0'
+        version: 19.0.0(react@19.0.0)
+      three:
+        specifier: ^0.174.0
+        version: 0.174.0
+    devDependencies:
+      '@vitejs/plugin-react':
+        specifier: '4.3'
+        version: 4.3.4(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
+      vite:
+        specifier: ^6.2.2
+        version: 6.3.5(sass@1.89.2)(yaml@2.8.0)
+      vite-plugin-restart:
+        specifier: ^0.4.2
+        version: 0.4.2(vite@6.3.5(sass@1.89.2)(yaml@2.8.0))
+
   packages/guang-first-scene: {}
 
   packages/threejs-editor:
